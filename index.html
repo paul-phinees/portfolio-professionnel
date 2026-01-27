@@ -15,13 +15,13 @@
         <div class="container">
             <div class="nav-brand">Mon Portfolio</div>
             <ul class="nav-menu">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#formation">Formation</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#accueil" data-page="0">Accueil</a></li>
+                <li><a href="#apropos" data-page="1">À propos</a></li>
+                <li><a href="#competences" data-page="2">Compétences</a></li>
+                <li><a href="#experience" data-page="3">Expérience</a></li>
+                <li><a href="#formation" data-page="4">Formation</a></li>
+                <li><a href="#cv" data-page="5">CV</a></li>
+                <li><a href="#contact" data-page="6">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -31,8 +31,25 @@
         </div>
     </nav>
 
+    <!-- Pagination Navigation -->
+    <div class="pagination-nav">
+        <button class="pagination-btn prev-btn" id="prevBtn" aria-label="Page précédente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Précédent
+        </button>
+        <div class="pagination-indicators" id="paginationIndicators"></div>
+        <button class="pagination-btn next-btn" id="nextBtn" aria-label="Page suivante">
+            Suivant
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
     <!-- Section Hero -->
-    <section id="accueil" class="hero">
+    <section id="accueil" class="hero page-section" data-page="0">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-image">
@@ -56,7 +73,7 @@
     </section>
 
     <!-- Section À propos -->
-    <section id="apropos" class="about">
+    <section id="apropos" class="about page-section" data-page="1">
         <div class="container">
             <h2 class="section-title">À propos de moi</h2>
             <div class="about-content">
@@ -91,7 +108,7 @@
     </section>
 
     <!-- Section Compétences -->
-    <section id="competences" class="skills">
+    <section id="competences" class="skills page-section" data-page="2">
         <div class="container">
             <h2 class="section-title">Compétences</h2>
             <div class="skills-grid">
@@ -143,7 +160,7 @@
     </section>
 
     <!-- Section Expérience -->
-    <section id="experience" class="experience">
+    <section id="experience" class="experience page-section" data-page="3">
         <div class="container">
             <h2 class="section-title">Expérience Professionnelle</h2>
             <div class="timeline">
@@ -200,7 +217,7 @@
     </section>
 
     <!-- Section Formation -->
-    <section id="formation" class="education">
+    <section id="formation" class="education page-section" data-page="4">
         <div class="container">
             <h2 class="section-title">Formation</h2>
             <div class="education-grid">
@@ -231,7 +248,7 @@
     </section>
 
     <!-- Section CV -->
-    <section id="cv" class="cv-section">
+    <section id="cv" class="cv-section page-section" data-page="5">
         <div class="container">
             <h2 class="section-title">Curriculum Vitae</h2>
             <div class="cv-content">
@@ -278,7 +295,7 @@
     </section>
 
     <!-- Section Contact -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact page-section" data-page="6">
         <div class="container">
             <h2 class="section-title">Contact</h2>
             <div class="contact-content">
