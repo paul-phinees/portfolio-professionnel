@@ -6,15 +6,17 @@
 }
 
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
+    --primary-color: #10b981;
+    --secondary-color: #059669;
+    --accent-color: #34d399;
     --text-color: #1f2937;
     --text-light: #6b7280;
     --bg-color: #ffffff;
-    --bg-light: #f9fafb;
-    --border-color: #e5e7eb;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --bg-light: #f0fdf4;
+    --bg-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+    --border-color: #d1fae5;
+    --shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(16, 185, 129, 0.15);
     --transition: all 0.3s ease;
 }
 
@@ -207,8 +209,12 @@ body {
     height: 300px;
     object-fit: cover;
     border-radius: 50%;
-    border: 5px solid var(--primary-color);
+    border: 5px solid;
+    border-image: var(--bg-gradient) 1;
     box-shadow: var(--shadow-lg);
+    background: linear-gradient(white, white) padding-box,
+                var(--bg-gradient) border-box;
+    border: 5px solid transparent;
 }
 
 .hero-title {
@@ -220,7 +226,10 @@ body {
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    background: var(--bg-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 1rem;
     font-weight: 600;
 }
@@ -292,7 +301,7 @@ section {
     display: block;
     width: 80px;
     height: 4px;
-    background: var(--primary-color);
+    background: var(--bg-gradient);
     margin: 1rem auto;
     border-radius: 2px;
 }
@@ -522,6 +531,128 @@ section {
     color: var(--text-light);
 }
 
+/* Services Section */
+.services {
+    background: var(--bg-light);
+}
+
+.services-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.service-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.services-cta {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.services-cta p {
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Hobbies Section */
+.hobbies-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.hobbies-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.hobby-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.hobby-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hobby-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.hobby-item strong {
+    display: block;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.hobby-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
 /* CV Section */
 .cv-section {
     background: var(--bg-color);
@@ -539,7 +670,7 @@ section {
 .cv-download {
     text-align: center;
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: var(--bg-gradient);
     border-radius: 16px;
     color: white;
     box-shadow: var(--shadow-lg);
@@ -813,6 +944,14 @@ section {
     }
 
     .education-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobbies-grid {
         grid-template-columns: 1fr;
     }
 }
