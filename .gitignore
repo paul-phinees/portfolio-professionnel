@@ -1,0 +1,27 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Fichiers Python (si vous en avez)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Fichiers de configuration locaux
+.env
+.env.local
+
+# Fichiers de l'éditeur
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
