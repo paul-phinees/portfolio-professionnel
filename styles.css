@@ -144,6 +144,153 @@ body {
     padding-top: 80px;
 }
 
+/* Hero - accueil + visuels sobres */
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.smart-agri-strip {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.smart-agri-card {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: white;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.smart-agri-visual {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: var(--primary-color);
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+}
+
+.smart-agri-text strong {
+    display: block;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+}
+
+.smart-agri-text span {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Formation - Certificats */
+.certifications {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.certifications-title {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.certification-item {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.certification-item strong {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.certification-item span {
+    color: var(--text-light);
+    font-size: 0.98rem;
+}
+
+/* Services - projet / application */
+.project-highlight {
+    max-width: 900px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.project-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.75rem 1.75rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.project-header h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.25rem;
+}
+
+.project-link {
+    text-decoration: none;
+    color: white;
+    background: var(--primary-color);
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.project-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.project-card p {
+    margin: 0;
+    color: var(--text-light);
+    line-height: 1.75;
+}
+
 .navbar .container {
     display: flex;
     justify-content: space-between;
@@ -953,6 +1100,15 @@ section {
 
     .hobbies-grid {
         grid-template-columns: 1fr;
+    }
+
+    .smart-agri-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
