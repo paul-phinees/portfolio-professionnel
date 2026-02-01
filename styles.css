@@ -303,6 +303,41 @@ body {
     color: var(--primary-color);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.language-selector {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--bg-light);
+    padding: 0.25rem;
+    border-radius: 8px;
+}
+
+.lang-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.lang-btn:hover {
+    background: white;
+}
+
+.lang-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -983,6 +1018,51 @@ section {
     color: white;
     text-align: center;
     padding: 2rem 0;
+}
+
+.footer-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    font-size: 2rem;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-content strong {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+}
+
+.stat-content span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
 }
 
 .footer p {

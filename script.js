@@ -198,3 +198,95 @@ if (profilePhoto) {
     });
 }
 
+// Système de traduction
+let currentLang = localStorage.getItem('portfolioLang') || 'fr';
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('portfolioLang', lang);
+    document.documentElement.lang = lang;
+    
+    // Mettre à jour tous les éléments avec data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Mettre à jour les boutons de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Initialiser la langue
+if (typeof translations !== 'undefined') {
+    setLanguage(currentLang);
+    
+    // Gestion du changement de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+}
+
+// Système de comptage des visiteurs
+function incrementVisitor() {
+    let visitorCount = parseInt(localStorage.getItem('portfolioVisitors') || '0');
+    const lastVisit = localStorage.getItem('portfolioLastVisit');
+    const today = new Date().toDateString();
+    
+    // Incrémenter seulement si c'est une nouvelle visite (nouveau jour)
+    if (lastVisit !== today) {
+        visitorCount++;
+        localStorage.setItem('portfolioVisitors', visitorCount.toString());
+        localStorage.setItem('portfolioLastVisit', today);
+    }
+    
+    return visitorCount;
+}
+
+// Système de comptage des téléchargements CV
+function incrementCvDownload() {
+    let downloadCount = parseInt(localStorage.getItem('portfolioCvDownloads') || '0');
+    downloadCount++;
+    localStorage.setItem('portfolioCvDownloads', downloadCount.toString());
+    return downloadCount;
+}
+
+// Afficher les compteurs
+function updateCounters() {
+    const visitorCountEl = document.getElementById('visitorCount');
+    const cvDownloadCountEl = document.getElementById('cvDownloadCount');
+    const totalCvDownloadsEl = document.getElementById('totalCvDownloads');
+    
+    if (visitorCountEl) {
+        const visitors = incrementVisitor();
+        visitorCountEl.textContent = visitors.toLocaleString();
+    }
+    
+    if (cvDownloadCountEl || totalCvDownloadsEl) {
+        const downloads = parseInt(localStorage.getItem('portfolioCvDownloads') || '0');
+        if (cvDownloadCountEl) cvDownloadCountEl.textContent = downloads.toLocaleString();
+        if (totalCvDownloadsEl) totalCvDownloadsEl.textContent = downloads.toLocaleString();
+    }
+}
+
+// Gérer les téléchargements du CV
+document.querySelectorAll('#cvDownloadBtn, #cvDownloadBtnLarge').forEach(btn => {
+    btn.addEventListener('click', () => {
+        incrementCvDownload();
+        updateCounters();
+    });
+});
+
+// Initialiser les compteurs au chargement
+updateCounters();
+
