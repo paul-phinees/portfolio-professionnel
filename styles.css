@@ -1182,6 +1182,30 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
+    .language-selector {
+        order: -1;
+    }
+
+    .footer-stats {
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        padding: 0.75rem 1rem;
+    }
+
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+
+    .stat-content span {
+        font-size: 1.2rem;
+    }
+
     .smart-agri-strip {
         grid-template-columns: 1fr;
     }
