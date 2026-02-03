@@ -237,7 +237,11 @@ if (typeof translations !== 'undefined') {
     });
 }
 
-// Système de comptage des visiteurs
+// Détection mode admin (pour les statistiques privées)
+const urlParams = new URLSearchParams(window.location.search);
+const isAdmin = urlParams.get('admin') === '1';
+
+// Système de comptage des visiteurs (stockage local, par navigateur)
 function incrementVisitor() {
     let visitorCount = parseInt(localStorage.getItem('portfolioVisitors') || '0');
     const lastVisit = localStorage.getItem('portfolioLastVisit');
@@ -253,7 +257,7 @@ function incrementVisitor() {
     return visitorCount;
 }
 
-// Système de comptage des téléchargements CV
+// Système de comptage des téléchargements CV (stockage local, par navigateur)
 function incrementCvDownload() {
     let downloadCount = parseInt(localStorage.getItem('portfolioCvDownloads') || '0');
     downloadCount++;
@@ -261,11 +265,30 @@ function incrementCvDownload() {
     return downloadCount;
 }
 
-// Afficher les compteurs
+// Afficher les compteurs (seulement pour l'administrateur avec ?admin=1)
 function updateCounters() {
     const visitorCountEl = document.getElementById('visitorCount');
     const cvDownloadCountEl = document.getElementById('cvDownloadCount');
     const totalCvDownloadsEl = document.getElementById('totalCvDownloads');
+    const adminBlocks = document.querySelectorAll('.footer-stats');
+    const cvDownloadContainer = cvDownloadCountEl ? cvDownloadCountEl.parentElement : null;
+
+    // Si pas en mode admin, masquer les blocs d'admin et ne pas afficher les valeurs
+    if (!isAdmin) {
+        adminBlocks.forEach(el => el.style.display = 'none');
+        if (cvDownloadContainer) {
+            cvDownloadContainer.style.display = 'none';
+        }
+        // On continue à incrémenter en arrière-plan, mais sans afficher
+        incrementVisitor();
+        return;
+    }
+
+    // Mode admin : afficher les blocs
+    adminBlocks.forEach(el => el.style.display = '');
+    if (cvDownloadContainer) {
+        cvDownloadContainer.style.display = '';
+    }
     
     if (visitorCountEl) {
         const visitors = incrementVisitor();
@@ -289,4 +312,28 @@ document.querySelectorAll('#cvDownloadBtn, #cvDownloadBtnLarge').forEach(btn => 
 
 // Initialiser les compteurs au chargement
 updateCounters();
+
+// Carrousel d'images d'agriculture intelligente
+const agriCarousel = document.getElementById('agriCarousel');
+const agriImages = [
+    'assets/Paul pro/agri-1.jpg',
+    'assets/Paul pro/agri-2.jpg',
+    'assets/Paul pro/agri-3.jpg'
+];
+
+if (agriCarousel) {
+    let agriIndex = 0;
+
+    function updateAgriImage() {
+        agriIndex = (agriIndex + 1) % agriImages.length;
+        agriCarousel.style.opacity = '0';
+        setTimeout(() => {
+            agriCarousel.src = agriImages[agriIndex];
+            agriCarousel.style.opacity = '1';
+        }, 400);
+    }
+
+    // Démarrer le carrousel (toutes les 6 secondes)
+    setInterval(updateAgriImage, 6000);
+}
 

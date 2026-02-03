@@ -201,6 +201,24 @@ body {
     font-size: 0.95rem;
 }
 
+/* Hero carousel d'images agriculture intelligente */
+.hero-carousel {
+    margin-top: 1.75rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    max-height: 260px;
+}
+
+.hero-carousel img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.8s ease;
+}
+
 /* Formation - Certificats */
 .certifications {
     margin-top: 3rem;
