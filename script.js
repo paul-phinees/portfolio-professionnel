@@ -313,19 +313,41 @@ document.querySelectorAll('#cvDownloadBtn, #cvDownloadBtnLarge').forEach(btn => 
 // Initialiser les compteurs au chargement
 updateCounters();
 
-// Carrousel d'images d'agriculture intelligente
-const agriCarousel = document.getElementById('agriCarousel');
-const agriCarouselContainer = document.querySelector('.hero-carousel');
-
-// Liste des images disponibles (sélectionnées parmi vos images)
-// Encodage des espaces pour compatibilité web
-const agriImages = [
+// Carrousel d'images en background de la page d'accueil
+// Liste de TOUTES les images disponibles
+const allAgriImages = [
     'assets/Paul%20pro/agriculture.jpg',
     'assets/Paul%20pro/developpement-agricole-durable-55.png',
     'assets/Paul%20pro/Lagriculture-durable-face-aux-changements-climatiques.jpg',
+    'assets/Paul%20pro/20250930_115719.jpg',
     'assets/Paul%20pro/20251216_100648.jpg',
+    'assets/Paul%20pro/IMG-20250424-WA0026.jpg',
+    'assets/Paul%20pro/IMG-20250428-WA0021.jpg',
+    'assets/Paul%20pro/IMG-20250428-WA0024.jpg',
+    'assets/Paul%20pro/IMG-20250524-WA0031.jpg',
+    'assets/Paul%20pro/IMG-20250606-WA0059.jpg',
+    'assets/Paul%20pro/IMG-20250612-WA0018.jpg',
+    'assets/Paul%20pro/IMG-20250630-WA0032.jpg',
+    'assets/Paul%20pro/IMG-20250630-WA0300.jpg',
+    'assets/Paul%20pro/IMG-20250703-WA0005.jpg',
+    'assets/Paul%20pro/IMG-20250909-WA0120.jpg',
+    'assets/Paul%20pro/IMG-20251220-WA0059.jpg',
+    'assets/Paul%20pro/IMG-20251220-WA0060.jpg',
+    'assets/Paul%20pro/IMG-20251222-WA0130.jpg',
+    'assets/Paul%20pro/IMG_1398.jpeg',
+    'assets/Paul%20pro/IMG_20250920_224608_834.jpg',
+    'assets/Paul%20pro/IMG_20250929_194133_234.jpg',
+    'assets/Paul%20pro/IMG_20251106_161052_504.jpg',
+    'assets/Paul%20pro/IMG_20251106_161052_598.jpg',
     'assets/Paul%20pro/IMG_20251107_005223_261.jpg',
-    'assets/Paul%20pro/IMG_20251107_005228_860.jpg'
+    'assets/Paul%20pro/IMG_20251107_005228_860.jpg',
+    'assets/Paul%20pro/IMG_20260104_172026_094.jpg',
+    'assets/Paul%20pro/IMG_20260104_172032_359.jpg',
+    'assets/Paul%20pro/IMG_20260104_172032_643.jpg',
+    'assets/Paul%20pro/IMG_2221.jpeg',
+    'assets/Paul%20pro/izEmKPSF8ySJBM6XE_lVv.jpg',
+    'assets/Paul%20pro/Screenshot_20251111_032358_One%20UI%20Home.jpg',
+    'assets/Paul%20pro/Vert%20et%20Blanc%20Citations%20Facebook%20Publication_20251008_172235_0000.png'
 ];
 
 // Fonction pour vérifier si une image existe
@@ -338,56 +360,65 @@ function checkImageExists(src) {
     });
 }
 
-// Charger les images disponibles
-async function loadAgriImages() {
-    if (!agriCarousel) return;
+// Charger toutes les images disponibles en background
+async function loadAllAgriBackgroundImages() {
+    const bgImage1 = document.getElementById('heroBgImage1');
+    const bgImage2 = document.getElementById('heroBgImage2');
+    
+    if (!bgImage1 || !bgImage2) return;
     
     const availableImages = [];
     
-    // Vérifier chaque image
-    for (const imgSrc of agriImages) {
+    // Vérifier toutes les images
+    for (const imgSrc of allAgriImages) {
         const exists = await checkImageExists(imgSrc);
         if (exists) {
             availableImages.push(imgSrc);
         }
     }
     
-    // Si aucune image trouvée, masquer le carrousel
-    if (availableImages.length === 0) {
-        if (agriCarouselContainer) {
-            agriCarouselContainer.style.display = 'none';
-        }
-        return;
+    if (availableImages.length === 0) return;
+    
+    // Mélanger les images pour plus de variété
+    const shuffledImages = availableImages.sort(() => Math.random() - 0.5);
+    
+    let currentIndex = 0;
+    let nextIndex = 1;
+    
+    // Initialiser les deux backgrounds
+    bgImage1.style.backgroundImage = `url('${shuffledImages[0]}')`;
+    bgImage1.classList.add('active');
+    
+    if (shuffledImages.length > 1) {
+        bgImage2.style.backgroundImage = `url('${shuffledImages[1]}')`;
     }
     
-    // Afficher le carrousel
-    if (agriCarouselContainer) {
-        agriCarouselContainer.style.display = 'block';
-    }
-    
-    // Initialiser avec la première image
-    agriCarousel.src = availableImages[0];
-    agriCarousel.style.opacity = '1';
-    
-    let agriIndex = 0;
-    
-    function updateAgriImage() {
-        if (availableImages.length <= 1) return; // Pas besoin de changer s'il n'y a qu'une image
+    // Fonction pour changer l'image
+    function changeBackgroundImage() {
+        if (shuffledImages.length <= 1) return;
         
-        agriIndex = (agriIndex + 1) % availableImages.length;
-        agriCarousel.style.opacity = '0';
-        setTimeout(() => {
-            agriCarousel.src = availableImages[agriIndex];
-            agriCarousel.style.opacity = '1';
-        }, 400);
+        // Préparer la prochaine image
+        nextIndex = (nextIndex + 1) % shuffledImages.length;
+        const nextImage = shuffledImages[nextIndex];
+        
+        // Déterminer quelle image est active
+        const activeBg = bgImage1.classList.contains('active') ? bgImage1 : bgImage2;
+        const inactiveBg = bgImage1.classList.contains('active') ? bgImage2 : bgImage1;
+        
+        // Charger la nouvelle image dans l'inactive
+        inactiveBg.style.backgroundImage = `url('${nextImage}')`;
+        
+        // Transition
+        activeBg.classList.remove('active');
+        inactiveBg.classList.add('active');
+        
+        currentIndex = nextIndex;
     }
     
-    // Démarrer le carrousel seulement s'il y a plusieurs images (toutes les 6 secondes)
-    if (availableImages.length > 1) {
-        setInterval(updateAgriImage, 6000);
-    }
+    // Changer l'image toutes les 5 secondes (plus dynamique)
+    setInterval(changeBackgroundImage, 5000);
 }
 
 // Charger les images au démarrage
-loadAgriImages();
+loadAllAgriBackgroundImages();
 
