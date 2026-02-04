@@ -315,25 +315,81 @@ updateCounters();
 
 // Carrousel d'images d'agriculture intelligente
 const agriCarousel = document.getElementById('agriCarousel');
+const agriCarouselContainer = document.querySelector('.hero-carousel');
+
+// Liste des images possibles (avec différents formats et noms)
 const agriImages = [
     'assets/Paul pro/agri-1.jpg',
     'assets/Paul pro/agri-2.jpg',
-    'assets/Paul pro/agri-3.jpg'
+    'assets/Paul pro/agri-3.jpg',
+    'assets/Paul pro/agri-1.jpeg',
+    'assets/Paul pro/agri-2.jpeg',
+    'assets/Paul pro/agri-3.jpeg',
+    'assets/Paul pro/agri-1.png',
+    'assets/Paul pro/agri-2.png',
+    'assets/Paul pro/agri-3.png'
 ];
 
-if (agriCarousel) {
-    let agriIndex = 0;
+// Fonction pour vérifier si une image existe
+function checkImageExists(src) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = src;
+    });
+}
 
+// Charger les images disponibles
+async function loadAgriImages() {
+    if (!agriCarousel) return;
+    
+    const availableImages = [];
+    
+    // Vérifier chaque image
+    for (const imgSrc of agriImages) {
+        const exists = await checkImageExists(imgSrc);
+        if (exists) {
+            availableImages.push(imgSrc);
+        }
+    }
+    
+    // Si aucune image trouvée, masquer le carrousel
+    if (availableImages.length === 0) {
+        if (agriCarouselContainer) {
+            agriCarouselContainer.style.display = 'none';
+        }
+        return;
+    }
+    
+    // Afficher le carrousel
+    if (agriCarouselContainer) {
+        agriCarouselContainer.style.display = 'block';
+    }
+    
+    // Initialiser avec la première image
+    agriCarousel.src = availableImages[0];
+    agriCarousel.style.opacity = '1';
+    
+    let agriIndex = 0;
+    
     function updateAgriImage() {
-        agriIndex = (agriIndex + 1) % agriImages.length;
+        if (availableImages.length <= 1) return; // Pas besoin de changer s'il n'y a qu'une image
+        
+        agriIndex = (agriIndex + 1) % availableImages.length;
         agriCarousel.style.opacity = '0';
         setTimeout(() => {
-            agriCarousel.src = agriImages[agriIndex];
+            agriCarousel.src = availableImages[agriIndex];
             agriCarousel.style.opacity = '1';
         }, 400);
     }
-
-    // Démarrer le carrousel (toutes les 6 secondes)
-    setInterval(updateAgriImage, 6000);
+    
+    // Démarrer le carrousel seulement s'il y a plusieurs images (toutes les 6 secondes)
+    if (availableImages.length > 1) {
+        setInterval(updateAgriImage, 6000);
+    }
 }
+
+// Charger les images au démarrage
+loadAgriImages();
 
