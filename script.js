@@ -162,6 +162,14 @@ navLinks.forEach(link => {
     });
 });
 
+// Gérer les boutons "Me contacter" dans la page d'accueil
+document.querySelectorAll('a[href="#contact"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToPage(7); // Page contact
+    });
+});
+
 // Gérer le hash de l'URL au chargement
 window.addEventListener('load', () => {
     const hash = window.location.hash.substring(1);
