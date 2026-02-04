@@ -317,17 +317,14 @@ updateCounters();
 const agriCarousel = document.getElementById('agriCarousel');
 const agriCarouselContainer = document.querySelector('.hero-carousel');
 
-// Liste des images possibles (avec différents formats et noms)
+// Liste des images disponibles (sélectionnées parmi vos images)
 const agriImages = [
-    'assets/Paul pro/agri-1.jpg',
-    'assets/Paul pro/agri-2.jpg',
-    'assets/Paul pro/agri-3.jpg',
-    'assets/Paul pro/agri-1.jpeg',
-    'assets/Paul pro/agri-2.jpeg',
-    'assets/Paul pro/agri-3.jpeg',
-    'assets/Paul pro/agri-1.png',
-    'assets/Paul pro/agri-2.png',
-    'assets/Paul pro/agri-3.png'
+    'assets/Paul pro/agriculture.jpg',
+    'assets/Paul pro/developpement-agricole-durable-55.png',
+    'assets/Paul pro/Lagriculture-durable-face-aux-changements-climatiques.jpg',
+    'assets/Paul pro/20251216_100648.jpg',
+    'assets/Paul pro/IMG_20251107_005223_261.jpg',
+    'assets/Paul pro/IMG_20251107_005228_860.jpg'
 ];
 
 // Fonction pour vérifier si une image existe
